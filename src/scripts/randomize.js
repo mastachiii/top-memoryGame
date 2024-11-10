@@ -1,4 +1,5 @@
 // Expects an object and spits out an array with it's keys in a random index.
+import { createList } from './api.js';
 
 function randomizeList(list) {
     const keys = Object.keys(list);
@@ -13,5 +14,7 @@ function randomizeList(list) {
 
     return randomized;
 }
+
+// TODO: Finish Array to Object mapper
 
 export { randomizeList };

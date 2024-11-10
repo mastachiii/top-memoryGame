@@ -1,6 +1,5 @@
-// Fetches necessary data from PokeApi and compiles it into a list for components to use
-
-async function createList(url) {
+// Fetches necessary data from PokeApi and compiles it into a list for components to useE
+async function createList(url = 'https://pokeapi.co/api/v2/pokemon/') {
     const ids = new Set(); // Store used ids to avoid duplication
     const list = {
         names: [],
