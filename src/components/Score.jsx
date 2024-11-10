@@ -1,7 +1,7 @@
 function Score({ value, text }) {
     return (
         <p>
-            {text}: {value}
+            {text}{value}
         </p>
     );
 }

@@ -3,31 +3,32 @@ import { Card } from './components/Card';
 import { randomizeList } from './scripts/randomize';
 import { Score } from './components/Score';
 
+const dummyList = {
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+};
+
 function App() {
-    const [cardStatus, setCardStatus] = useState({
-        1: false,
-        2: false,
-        3: false,
-        4: false,
-        5: false,
-    });
+    const [cardsStatus, setCardsStatus] = useState(dummyList);
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
-    const list = randomizeList(cardStatus);
+    const list = randomizeList(cardsStatus);
 
     function handleGameFlow(key) {
         return () => {
-            const newStatus = !cardStatus[key];
+            const status = !cardsStatus[key];
 
             // If new status is true, it means that it's the first time it has been selected.
-            if (newStatus) {
-                setCardStatus({ ...cardStatus, [key]: !cardStatus[key] });
+            if (status) {
+                setCardsStatus({ ...cardsStatus, [key]: !cardsStatus[key] });
                 setCurrentScore(currentScore + 1);
             } else {
                 alert('Game Over!');
-
-                //TODO: Reset Game
-
+                setCardsStatus(dummyList);
+                setCurrentScore(0);
                 currentScore > bestScore ? setBestScore(currentScore) : null;
             }
         };
@@ -39,7 +40,7 @@ function App() {
                 return (
                     <Card
                         value={item}
-                        status={cardStatus[item]}
+                        status={cardsStatus[item]}
                         handler={handleGameFlow(item)}
                         key={index}
                     />
