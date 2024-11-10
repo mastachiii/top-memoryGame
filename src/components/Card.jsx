@@ -1,13 +1,7 @@
 import { userRef, useState } from 'react';
 
-function Card({ value }) {
-    const [hasBeenSelected, setHasBeenSelected] = useState(false);
-
-    function handleClick() {
-        setHasBeenSelected(true);
-    }
-    
-    return <div onClick={handleClick}>{!hasBeenSelected ? value : 'Selected'}</div>;
+function Card({ value, status, handler }) {
+    return <div onClick={handler}>{status ? 'Selected' : value}</div>;
 }
 
 export { Card };
