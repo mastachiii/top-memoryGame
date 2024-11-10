@@ -1,21 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card } from './components/Card';
-import { randomizeList } from './scripts/randomize';
 import { Score } from './components/Score';
-
-const dummyList = {
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-};
+import { generateMappedList } from './scripts/generate';
+import { randomizeList } from './scripts/randomize';
 
 function App() {
-    const [cardsStatus, setCardsStatus] = useState(dummyList);
+    const [foo, setFoo] = useState(false);
+    const [cardsStatus, setCardsStatus] = useState(null);
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
-    const list = randomizeList(cardsStatus);
+    // const list = randomizeList(cardsStatus);
 
     function handleGameFlow(key) {
         return () => {
@@ -27,29 +21,47 @@ function App() {
                 setCurrentScore(currentScore + 1);
             } else {
                 alert('Game Over!');
-                setCardsStatus(dummyList);
+                setCardsStatus(null);
                 setCurrentScore(0);
                 currentScore > bestScore ? setBestScore(currentScore) : null;
             }
         };
     }
 
-    return (
-        <div>
-            {list.map((item, index) => {
-                return (
-                    <Card
-                        value={item}
-                        status={cardsStatus[item]}
-                        handler={handleGameFlow(item)}
-                        key={index}
-                    />
-                );
-            })}
-            <Score value={currentScore} text='Current Score: ' />
-            <Score value={bestScore} text='Best Score: ' />
-        </div>
-    );
+    useEffect(() => {
+        async function fetchData() {
+            const list = await generateMappedList();
+
+            console.log(list);
+            setCardsStatus(list);
+        }
+
+        fetchData();
+    }, []);
+
+    // TODO: Integrate PokeList to game logic. 
+    
+    if (cardsStatus) {
+        return (
+            <p>SUCCESS</p>
+            // <div>
+            //     {list.map((item, index) => {
+            //         return (
+            //             <Card
+            //                 value={item}
+            //                 status={cardsStatus[item]}
+            //                 handler={handleGameFlow(item)}
+            //                 key={index}
+            //             />
+            //         );
+            //     })}
+            //     <Score value={currentScore} text='Current Score: ' />
+            //     <Score value={bestScore} text='Best Score: ' />
+            // </div>
+        );
+    } else {
+        return <p>test</p>;
+    }
 }
 
 export default App;

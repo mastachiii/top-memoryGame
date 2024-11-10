@@ -1,7 +1,4 @@
 // Expects an object and spits out an array with it's keys in a random index.
-
-import { generateMappedList } from './generate.js';
-
 function randomizeList(list) {
     const keys = Object.keys(list);
     const randomized = [];
@@ -14,13 +11,5 @@ function randomizeList(list) {
 
     return randomized;
 }
-
-async function foo() {
-    const list = await generateMappedList();
-    console.log(list);
-    console.log(randomizeList(list));
-}
-
-foo();
 
 export { randomizeList };
