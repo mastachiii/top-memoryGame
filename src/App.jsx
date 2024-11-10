@@ -12,14 +12,8 @@ function App() {
         5: false,
     });
     const [currentScore, setCurrentScore] = useState(0);
-
+    const [bestScore, setBestScore] = useState(0);
     const list = randomizeList(cardStatus);
-
-    function handleCardStatus(key) {
-        return () => {
-            setCardStatus({ ...cardStatus, [key]: !cardStatus[key] });
-        };
-    }
 
     function handleGameFlow(key) {
         return () => {
@@ -29,6 +23,12 @@ function App() {
             if (newStatus) {
                 setCardStatus({ ...cardStatus, [key]: !cardStatus[key] });
                 setCurrentScore(currentScore + 1);
+            } else {
+                alert('Game Over!');
+
+                //TODO: Reset Game
+
+                currentScore > bestScore ? setBestScore(currentScore) : null;
             }
         };
     }
@@ -45,7 +45,8 @@ function App() {
                     />
                 );
             })}
-            <Score value={currentScore} />
+            <Score value={currentScore} text='Current Score: ' />
+            <Score value={bestScore} text='Best Score: ' />
         </div>
     );
 }

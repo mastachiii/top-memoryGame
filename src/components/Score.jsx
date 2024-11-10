@@ -1,5 +1,9 @@
-function Score({ value }) {
-    return <p>{value}</p>;
+function Score({ value, text }) {
+    return (
+        <p>
+            {text}: {value}
+        </p>
+    );
 }
 
 export { Score };
