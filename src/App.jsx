@@ -18,7 +18,18 @@ function App() {
     function handleCardStatus(key) {
         return () => {
             setCardStatus({ ...cardStatus, [key]: !cardStatus[key] });
-            setCurrentScore(currentScore + 1);
+        };
+    }
+
+    function handleGameFlow(key) {
+        return () => {
+            const newStatus = !cardStatus[key];
+
+            // If new status is true, it means that it's the first time it has been selected.
+            if (newStatus) {
+                setCardStatus({ ...cardStatus, [key]: !cardStatus[key] });
+                setCurrentScore(currentScore + 1);
+            }
         };
     }
 
@@ -29,7 +40,7 @@ function App() {
                     <Card
                         value={item}
                         status={cardStatus[item]}
-                        handler={handleCardStatus(item)}
+                        handler={handleGameFlow(item)}
                         key={index}
                     />
                 );
