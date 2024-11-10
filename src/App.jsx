@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Card } from './components/Card';
 import { randomizeList } from './scripts/randomize';
+import { Score } from './components/Score';
 
 function App() {
     const [cardStatus, setCardStatus] = useState({
@@ -10,20 +11,32 @@ function App() {
         4: false,
         5: false,
     });
+    const [currentScore, setCurrentScore] = useState(0);
 
-    console.log(randomizeList(cardStatus))
+    const list = randomizeList(cardStatus);
 
     function handleCardStatus(key) {
-        return () => setCardStatus({ ...cardStatus, [key]: !cardStatus[key] });
+        return () => {
+            setCardStatus({ ...cardStatus, [key]: !cardStatus[key] });
+            setCurrentScore(currentScore + 1);
+        };
     }
 
-    // return (
-    //     // <div>
-    //     //     <Card value={arr[0]} status={cardStatus[arr[0]]} handler={handleCardStatus(arr[0])} />
-    //     //     <Card value={arr[1]} status={cardStatus[arr[1]]} handler={handleCardStatus(arr[1])} />
-    //     //     <Card value={arr[2]} status={cardStatus[arr[2]]} handler={handleCardStatus(arr[2])} />
-    //     // </div>
-    // );
+    return (
+        <div>
+            {list.map((item, index) => {
+                return (
+                    <Card
+                        value={item}
+                        status={cardStatus[item]}
+                        handler={handleCardStatus(item)}
+                        key={index}
+                    />
+                );
+            })}
+            <Score value={currentScore} />
+        </div>
+    );
 }
 
 export default App;
