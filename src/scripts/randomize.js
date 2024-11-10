@@ -1,4 +1,5 @@
-// Expects an object and spits out a array with it's keys in a random index.
+// Expects an object and spits out an array with it's keys in a random index.
+
 function randomizeList(list) {
     const keys = Object.keys(list);
     const randomized = [];
