@@ -15,17 +15,21 @@ function App() {
     function handleGameFlow(key) {
         return () => {
             const status = !cards[key];
+            switch (status) {
+                case true:
+                    // Needed to create an explicit copy so that cardsSelected is up-to-date with the state of the game.
+                    const copy = { ...cards, [key]: 'Selected' };
+                    const cardsSelected = Object.values(copy).filter((item) => item);
+                    setCards(copy);
+                    setCurrentScore(currentScore + 1);
+                    break;
 
-            // If new status is true, it means that it's the first time it has been selected.
-            if (status) {
-                setCards({ ...cards, [key]: 'Selected' });
-                setCurrentScore(currentScore + 1);
-            } else {
-                alert('Game Over!');
-                setFetchStatus(false);
-                setCards(null);
-                setCurrentScore(0);
-                currentScore > bestScore ? setBestScore(currentScore) : null;
+                case false:
+                    alert('Game Over!');
+                    setFetchStatus(false);
+                    setCards(null);
+                    setCurrentScore(0);
+                    currentScore > bestScore ? setBestScore(currentScore) : null;
             }
         };
     }
