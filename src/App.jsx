@@ -23,7 +23,7 @@ function App() {
 
         return () => {
             switch (cards[key]) {
-                case 'SELECTED': {
+                case 'UNSELECTED': {
                     // Needed to create an explicit copy so that cardsSelected is up-to-date with the state of the game.
                     const copy = { ...cards, [key]: 'SELECTED' };
                     const cardsSelected = Object.values(copy).filter((item) => item);
@@ -35,7 +35,7 @@ function App() {
                     break;
                 }
 
-                case 'UNSELECTED':
+                case 'SELECTED':
                     resetGame('Game Over');
             }
         };
