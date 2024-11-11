@@ -13,25 +13,30 @@ function App() {
     const [bestScore, setBestScore] = useState(0);
 
     function handleGameFlow(key) {
+        const resetGame = (text) => {
+            currentScore > bestScore ? setBestScore(currentScore) : null;
+            alert(text);
+            setFetchStatus(false);
+            setCards(null);
+            setCurrentScore(0);
+        };
+
         return () => {
-            const status = !cards[key];
-            switch (status) {
-                case true: {
+            switch (cards[key]) {
+                case 'SELECTED': {
                     // Needed to create an explicit copy so that cardsSelected is up-to-date with the state of the game.
-                    const copy = { ...cards, [key]: 'Selected' };
+                    const copy = { ...cards, [key]: 'SELECTED' };
                     const cardsSelected = Object.values(copy).filter((item) => item);
-                    cardsSelected.length === 10 ? alert('You Win') : null;
+
+                    if (cardsSelected.length === 10) return resetGame('You Win!');
+
                     setCards(copy);
                     setCurrentScore(currentScore + 1);
                     break;
                 }
 
-                case false:
-                    alert('Game Over!');
-                    setFetchStatus(false);
-                    setCards(null);
-                    setCurrentScore(0);
-                    currentScore > bestScore ? setBestScore(currentScore) : null;
+                case 'UNSELECTED':
+                    resetGame('Game Over');
             }
         };
     }

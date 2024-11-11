@@ -4,7 +4,7 @@ function mapNames(array) {
     const obj = {};
 
     for (const item of array) {
-        obj[item] = false;
+        obj[item] = 'UNSELECTED';
     }
 
     return obj;
