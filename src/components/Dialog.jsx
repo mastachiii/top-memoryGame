@@ -19,7 +19,7 @@ function Dialog({ currentScore, bestScore, gameStatus, handler }) {
         // (https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#return_value)
         setTimeout(() => {
             handler();
-        }, 5000);
+        }, 2000);
 
         return (
             <dialog open={true}>

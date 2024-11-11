@@ -16,7 +16,6 @@ function App() {
 
     function handleGameFlow(key) {
         return () => {
-            // TODO: Show a Prompt if player loses or clears all of the cards.
             switch (cards[key]) {
                 case 'UNSELECTED': {
                     // Needed to create an explicit copy so that cardsSelected is up-to-date with the state of the game.
@@ -35,16 +34,13 @@ function App() {
         };
     }
 
-    function resetGame() {
-        currentScore > bestScore ? setBestScore(currentScore) : null;
-        setFetchStatus(false);
-        setCards(null);
-        setCurrentScore(0);
-    }
-
-    function FOO() {
-        setCards(null);
-        setFetchStatus(false);
+    function resetGame(gameStatus) {
+        return () => {
+            currentScore > bestScore ? setBestScore(currentScore) : null;
+            gameStatus === 'LOSE' ? setCurrentScore(0) : null;
+            setCards(null);
+            setFetchStatus(false);
+        };
     }
 
     useEffect(() => {
@@ -61,10 +57,10 @@ function App() {
     }, [fetchStatus]);
 
     if (fetchStatus) {
-        const cardsRandomized = randomizeList(cards);
-
         switch (gameStatus) {
             case 'INGAME': {
+                const cardsRandomized = randomizeList(cards);
+
                 return (
                     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                         {cardsRandomized.map((item) => {
@@ -88,7 +84,7 @@ function App() {
                     <Dialog
                         currentScore={currentScore}
                         bestScore={bestScore}
-                        handler={resetGame}
+                        handler={resetGame(gameStatus)}
                         gameStatus={gameStatus}
                     />
                 );
@@ -98,7 +94,7 @@ function App() {
                     <Dialog
                         currentScore={currentScore}
                         bestScore={bestScore}
-                        handler={FOO}
+                        handler={resetGame(gameStatus)}
                         gameStatus={gameStatus}
                     />
                 );
