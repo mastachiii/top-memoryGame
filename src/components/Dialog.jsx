@@ -1,6 +1,6 @@
-function Dialog({ open }) {
+function Dialog() {
     return (
-        <dialog open={open}>
+        <dialog open={true}>
             <p>FOO</p>
         </dialog>
     );

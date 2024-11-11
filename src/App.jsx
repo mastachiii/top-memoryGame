@@ -8,6 +8,7 @@ import { randomizeList } from './scripts/randomize';
 
 function App() {
     const [fetchStatus, setFetchStatus] = useState(false);
+    const [gameStatus, setGameStatus] = useState(null);
     const [cards, setCards] = useState(null);
     const [images, setImages] = useState(null);
     const [currentScore, setCurrentScore] = useState(0);
@@ -23,13 +24,16 @@ function App() {
         };
 
         return () => {
+            // TODO: Show a Prompt if player loses or clears all of the cards.
             switch (cards[key]) {
                 case 'UNSELECTED': {
                     // Needed to create an explicit copy so that cardsSelected is up-to-date with the state of the game.
                     const copy = { ...cards, [key]: 'SELECTED' };
                     const cardsSelected = Object.values(copy).filter((item) => item === 'SELECTED');
 
-                    if (cardsSelected.length === 10) return resetGame('You Win!');
+                    if (cardsSelected.length === 10) {
+                        return setGameStatus('CLEAR');
+                    }
 
                     setCards(copy);
                     setCurrentScore(currentScore + 1);
@@ -37,7 +41,7 @@ function App() {
                 }
 
                 case 'SELECTED':
-                    resetGame('Game Over');
+                    setGameStatus('LOSE');
             }
         };
     }
@@ -49,6 +53,7 @@ function App() {
             setCards(mapNames(list.names));
             setImages(list.images);
             setFetchStatus(true);
+            setGameStatus('INGAME');
         }
 
         if (!fetchStatus) fetchData();
@@ -57,22 +62,34 @@ function App() {
     if (fetchStatus) {
         const cardsRandomized = randomizeList(cards);
 
-        return (
-            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                {cardsRandomized.map((item) => {
-                    return (
-                        <Card
-                            value={images[item]}
-                            status={cards[item]}
-                            handler={handleGameFlow(item)}
-                            key={item}
-                        />
-                    );
-                })}
-                <Score value={currentScore} text='Current Score: ' />
-                <Score value={bestScore} text='Best Score: ' />
-            </div>
-        );
+        switch (gameStatus) {
+            case 'INGAME': {
+                return (
+                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                        {cardsRandomized.map((item) => {
+                            return (
+                                <Card
+                                    value={images[item]}
+                                    status={cards[item]}
+                                    handler={handleGameFlow(item)}
+                                    key={item}
+                                />
+                            );
+                        })}
+                        <Score value={currentScore} text='Current Score: ' />
+                        <Score value={bestScore} text='Best Score: ' />
+                        {gameStatus === 'GAME OVER' && <Dialog />}
+                    </div>
+                );
+            }
+
+            case 'LOSE':
+                alert('You Lose.');
+                break;
+
+            case 'CLEAR':
+                alert('CLEAR');
+        }
     } else {
         return <p>Fetching</p>;
     }
