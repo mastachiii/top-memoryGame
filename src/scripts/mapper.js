@@ -10,8 +10,4 @@ function mapNames(array) {
     return obj;
 }
 
-function mapSprites()
-
-
-
 export { mapNames };
