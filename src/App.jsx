@@ -34,17 +34,17 @@ function App() {
         async function fetchData() {
             const list = await createList();
 
-            setFetchStatus(true);
             setCards(mapNames(list.names));
             setImages(list.images);
+            setFetchStatus(true);
         }
 
-        fetchData();
+        if (!fetchStatus) fetchData();
     }, [fetchStatus]);
 
     if (fetchStatus) {
         const cardsRandomized = randomizeList(cards);
-        
+
         return (
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 {cardsRandomized.map((item) => {
