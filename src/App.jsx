@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card } from './components/Card';
 import { Score } from './components/Score';
+import { Dialog } from './components/Dialog';
 import { createList } from './scripts/api';
 import { mapNames } from './scripts/mapper';
 import { randomizeList } from './scripts/randomize';
@@ -26,7 +27,7 @@ function App() {
                 case 'UNSELECTED': {
                     // Needed to create an explicit copy so that cardsSelected is up-to-date with the state of the game.
                     const copy = { ...cards, [key]: 'SELECTED' };
-                    const cardsSelected = Object.values(copy).filter((item) => item);
+                    const cardsSelected = Object.values(copy).filter((item) => item === 'SELECTED');
 
                     if (cardsSelected.length === 10) return resetGame('You Win!');
 
