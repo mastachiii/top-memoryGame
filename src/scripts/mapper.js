@@ -1,7 +1,6 @@
 // Expects an array and converts it into an object where it's keys will be the elements and will have a default value of false.
 // Will be used for the card component to indicate if the card is selected or not.
-
-async function mapArray(array) {
+function mapArray(array) {
     const obj = {};
 
     for (const item of array) {
@@ -10,5 +9,7 @@ async function mapArray(array) {
 
     return obj;
 }
+
+
 
 export { mapArray };

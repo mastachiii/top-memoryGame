@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Card } from './components/Card';
 import { Score } from './components/Score';
+import { createList } from './scripts/api';
+import { mapArray } from './scripts/mapper';
+import { asset } from './scripts/asset';
 import { generateMappedList } from './scripts/generate';
 import { randomizeList } from './scripts/randomize';
 
