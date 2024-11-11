@@ -16,13 +16,15 @@ function App() {
         return () => {
             const status = !cards[key];
             switch (status) {
-                case true:
+                case true: {
                     // Needed to create an explicit copy so that cardsSelected is up-to-date with the state of the game.
                     const copy = { ...cards, [key]: 'Selected' };
                     const cardsSelected = Object.values(copy).filter((item) => item);
+                    cardsSelected.length === 10 ? alert('You Win') : null;
                     setCards(copy);
                     setCurrentScore(currentScore + 1);
                     break;
+                }
 
                 case false:
                     alert('Game Over!');
