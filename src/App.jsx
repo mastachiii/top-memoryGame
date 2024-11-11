@@ -15,14 +15,6 @@ function App() {
     const [bestScore, setBestScore] = useState(0);
 
     function handleGameFlow(key) {
-        const resetGame = (text) => {
-            currentScore > bestScore ? setBestScore(currentScore) : null;
-            alert(text);
-            setFetchStatus(false);
-            setCards(null);
-            setCurrentScore(0);
-        };
-
         return () => {
             // TODO: Show a Prompt if player loses or clears all of the cards.
             switch (cards[key]) {
@@ -44,6 +36,13 @@ function App() {
                     setGameStatus('LOSE');
             }
         };
+    }
+
+    function resetGame() {
+        currentScore > bestScore ? setBestScore(currentScore) : null;
+        setFetchStatus(false);
+        setCards(null);
+        setCurrentScore(0);
     }
 
     useEffect(() => {
@@ -78,14 +77,14 @@ function App() {
                         })}
                         <Score value={currentScore} text='Current Score: ' />
                         <Score value={bestScore} text='Best Score: ' />
-                        {gameStatus === 'GAME OVER' && <Dialog />}
                     </div>
                 );
             }
 
             case 'LOSE':
-                alert('You Lose.');
-                break;
+                return (
+                    <Dialog currentScore={currentScore} bestScore={bestScore} handler={resetGame} />
+                );
 
             case 'CLEAR':
                 alert('CLEAR');
