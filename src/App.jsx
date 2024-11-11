@@ -10,11 +10,13 @@ function App() {
     const [fetchStatus, setFetchStatus] = useState(false);
     const [gameStatus, setGameStatus] = useState(null);
     const [cards, setCards] = useState(null);
+    const [cardsPerLevel, setCardsPerLevel] = useState(3);
     const [images, setImages] = useState(null);
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
 
     function handleGameFlow(key) {
+        // TODO: Refactor API to fetch only 3 cards per level and mulitply once a level is cleared.
         return () => {
             switch (cards[key]) {
                 case 'UNSELECTED': {
@@ -24,7 +26,10 @@ function App() {
 
                     setCurrentScore(currentScore + 1);
 
-                    cardsSelected.length === 10 ? setGameStatus('CLEAR') : setCards(copy);
+                    cardsSelected.length === cardsPerLevel
+                        ? setGameStatus('CLEAR')
+                        : setCards(copy);
+
                     break;
                 }
 
@@ -37,7 +42,7 @@ function App() {
     function resetGame(gameStatus) {
         return () => {
             currentScore > bestScore ? setBestScore(currentScore) : null;
-            gameStatus === 'LOSE' ? setCurrentScore(0) : null;
+            gameStatus === 'LOSE' ? setCurrentScore(0) : setCardsPerLevel(cardsPerLevel + 3);
             setCards(null);
             setFetchStatus(false);
         };
@@ -45,7 +50,7 @@ function App() {
 
     useEffect(() => {
         async function fetchData() {
-            const list = await createList();
+            const list = await createList(cardsPerLevel);
 
             setCards(mapNames(list.names));
             setImages(list.images);
@@ -54,7 +59,7 @@ function App() {
         }
 
         if (!fetchStatus) fetchData();
-    }, [fetchStatus]);
+    }, [fetchStatus, cardsPerLevel]);
 
     if (fetchStatus) {
         switch (gameStatus) {

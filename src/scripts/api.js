@@ -1,16 +1,16 @@
 // Fetches necessary data from PokeApi and compiles it into a list for components to useE
-async function createList(url = 'https://pokeapi.co/api/v2/pokemon/') {
+async function createList(amountOfCards) {
     const ids = new Set(); // Store used ids to avoid duplication
     const list = {
         names: [],
         images: {},
     };
 
-    while (list.names.length !== 10) {
+    while (list.names.length !== amountOfCards) {
         const randomNumber = Math.floor(Math.random() * 1000);
 
         if (!ids.has(randomNumber)) {
-            await fetch(`${url}${randomNumber}`)
+            await fetch('https://pokeapi.co/api/v2/pokemon/' + randomNumber)
                 .then((response) => response.json())
                 .then((response) => {
                     const name = response.name;
