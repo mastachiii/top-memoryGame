@@ -23,12 +23,9 @@ function App() {
                     const copy = { ...cards, [key]: 'SELECTED' };
                     const cardsSelected = Object.values(copy).filter((item) => item === 'SELECTED');
 
-                    if (cardsSelected.length === 10) {
-                        return setGameStatus('CLEAR');
-                    }
-
-                    setCards(copy);
                     setCurrentScore(currentScore + 1);
+
+                    cardsSelected.length === 10 ? setGameStatus('CLEAR') : setCards(copy);
                     break;
                 }
 
@@ -43,6 +40,11 @@ function App() {
         setFetchStatus(false);
         setCards(null);
         setCurrentScore(0);
+    }
+
+    function FOO() {
+        setCards(null);
+        setFetchStatus(false);
     }
 
     useEffect(() => {
@@ -83,11 +85,23 @@ function App() {
 
             case 'LOSE':
                 return (
-                    <Dialog currentScore={currentScore} bestScore={bestScore} handler={resetGame} />
+                    <Dialog
+                        currentScore={currentScore}
+                        bestScore={bestScore}
+                        handler={resetGame}
+                        gameStatus={gameStatus}
+                    />
                 );
 
             case 'CLEAR':
-                alert('CLEAR');
+                return (
+                    <Dialog
+                        currentScore={currentScore}
+                        bestScore={bestScore}
+                        handler={FOO}
+                        gameStatus={gameStatus}
+                    />
+                );
         }
     } else {
         return <p>Fetching</p>;
