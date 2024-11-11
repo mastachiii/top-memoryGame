@@ -23,7 +23,6 @@ async function createList(url = 'https://pokeapi.co/api/v2/pokemon/') {
         }
     }
 
-    console.log(list);
     return list;
 }
 
