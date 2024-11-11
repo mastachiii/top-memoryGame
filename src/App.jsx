@@ -5,23 +5,23 @@ import { generateMappedList } from './scripts/generate';
 import { randomizeList } from './scripts/randomize';
 
 function App() {
-    const [foo, setFoo] = useState(false);
-    const [cardsStatus, setCardsStatus] = useState(null);
+    const [fetchStatus, setFetchStatus] = useState(false);
+    const [cards, setCards] = useState(null);
     const [currentScore, setCurrentScore] = useState(0);
     const [bestScore, setBestScore] = useState(0);
-    // const list = randomizeList(cardsStatus);
 
     function handleGameFlow(key) {
         return () => {
-            const status = !cardsStatus[key];
+            const status = !cards[key];
 
             // If new status is true, it means that it's the first time it has been selected.
             if (status) {
-                setCardsStatus({ ...cardsStatus, [key]: !cardsStatus[key] });
+                setCards({ ...cards, [key]: !cards[key] });
                 setCurrentScore(currentScore + 1);
             } else {
                 alert('Game Over!');
-                setCardsStatus(null);
+                setFetchStatus(false);
+                setCards(null);
                 setCurrentScore(0);
                 currentScore > bestScore ? setBestScore(currentScore) : null;
             }
@@ -32,35 +32,33 @@ function App() {
         async function fetchData() {
             const list = await generateMappedList();
 
-            console.log(list);
-            setCardsStatus(list);
+            setFetchStatus(true);
+            setCards(list);
         }
 
         fetchData();
-    }, []);
+    }, [fetchStatus]);
 
-    // TODO: Integrate PokeList to game logic. 
-    
-    if (cardsStatus) {
+    if (fetchStatus) {
+        const cardsRandomized = randomizeList(cards);
         return (
-            <p>SUCCESS</p>
-            // <div>
-            //     {list.map((item, index) => {
-            //         return (
-            //             <Card
-            //                 value={item}
-            //                 status={cardsStatus[item]}
-            //                 handler={handleGameFlow(item)}
-            //                 key={index}
-            //             />
-            //         );
-            //     })}
-            //     <Score value={currentScore} text='Current Score: ' />
-            //     <Score value={bestScore} text='Best Score: ' />
-            // </div>
+            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                {cardsRandomized.map((item) => {
+                    return (
+                        <Card
+                            value={item}
+                            status={cards[item]}
+                            handler={handleGameFlow(item)}
+                            key={item}
+                        />
+                    );
+                })}
+                <Score value={currentScore} text='Current Score: ' />
+                <Score value={bestScore} text='Best Score: ' />
+            </div>
         );
     } else {
-        return <p>test</p>;
+        return <p>Fetching</p>;
     }
 }
 
