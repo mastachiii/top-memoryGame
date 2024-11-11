@@ -20,8 +20,10 @@ async function createList(url = 'https://pokeapi.co/api/v2/pokemon/') {
             ids.add(randomNumber);
         }
     }
-
+    console.log(list);
     return list;
 }
+
+createList()
 
 export { createList };
