@@ -67,6 +67,10 @@ function App() {
 
                 return (
                     <div>
+                        <div className='score'>
+                            <Score value={currentScore} text='Current Score: ' />
+                            <Score value={bestScore} text='Best Score: ' />
+                        </div>
                         <div className="cards">
                             {cardsRandomized.map((item) => {
                                 return (
@@ -78,10 +82,6 @@ function App() {
                                     />
                                 );
                             })}
-                        </div>
-                        <div className='score'>
-                            <Score value={currentScore} text='Current Score: ' />
-                            <Score value={bestScore} text='Best Score: ' />
                         </div>
                     </div>
                 );
