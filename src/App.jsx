@@ -73,7 +73,7 @@ function App() {
                             <Score value={currentScore} text='Current Score: ' />
                             <Score value={bestScore} text='Best Score: ' />
                         </div>
-                        <div className='cards'>
+                        <div className='cards foo' >
                             {cardsRandomized.map((item) => {
                                 return (
                                     <Card
