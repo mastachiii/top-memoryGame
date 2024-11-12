@@ -7,7 +7,8 @@ import './styles/index.css';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <Audio url={'/sfx/littleroot.mp3'} />
+        <Audio url={'/sfx/littleroot.mp3'} loop={true} autoPlay={true} />
+        <Audio url={'/sfx/select.mp3'} id={'select'} />
         <Background />
         <App />
     </StrictMode>

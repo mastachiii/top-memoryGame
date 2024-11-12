@@ -5,6 +5,7 @@ import { Dialog } from './components/Dialog';
 import { createList } from './scripts/api';
 import { mapNames } from './scripts/mapper';
 import { randomizeList } from './scripts/randomize';
+import { selectSfx } from './scripts/dom';
 
 function App() {
     const [fetchStatus, setFetchStatus] = useState(false);
@@ -66,6 +67,10 @@ function App() {
 
         if (!fetchStatus) fetchData();
     }, [fetchStatus, cardsPerLevel]);
+
+    useEffect(() => {
+        selectSfx();
+    }, [currentScore]);
 
     if (fetchStatus) {
         switch (gameStatus) {

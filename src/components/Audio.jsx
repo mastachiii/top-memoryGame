@@ -1,6 +1,6 @@
-function Audio({url}) {
+function Audio({ url, loop, autoPlay, id }) {
     return (
-        <audio autoPlay loop>
+        <audio autoPlay={autoPlay} loop={loop} id={id}>
             <source src={url} type='audio/mpeg' />
         </audio>
     );
