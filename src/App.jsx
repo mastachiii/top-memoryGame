@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Card } from './components/Card';
 import { Score } from './components/Score';
 import { Dialog } from './components/Dialog';
-import { Background } from './components/Background';
 import { createList } from './scripts/api';
 import { mapNames } from './scripts/mapper';
 import { randomizeList } from './scripts/randomize';
