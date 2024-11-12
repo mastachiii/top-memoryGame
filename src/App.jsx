@@ -71,11 +71,12 @@ function App() {
                             <Score value={currentScore} text='Current Score: ' />
                             <Score value={bestScore} text='Best Score: ' />
                         </div>
-                        <div className="cards">
+                        <div className='cards'>
                             {cardsRandomized.map((item) => {
                                 return (
                                     <Card
-                                        value={images[item]}
+                                        text={item}
+                                        imageUrl={images[item]}
                                         status={cards[item]}
                                         handler={handleGameFlow(item)}
                                         key={item}

@@ -2,10 +2,15 @@
     box-sizing: border-box;
 }
 
+html {
+    background-color: rgb(222, 231, 194);
+}
+
 img {
     display: block;
     width: 60%;
     margin: auto;
+    filter: grayscale(100%);
 }
 
 #root {
@@ -27,6 +32,7 @@ img {
 
     > div {
         width: 15%;
+        text-align: center;
     }
 }
 
