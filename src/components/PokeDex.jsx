@@ -4,14 +4,18 @@ function PokeDex() {
 
     return (
         <div className='pokeDex'>
-            <h1>Pokédex</h1>
-            <p>({listKeys.length} / 1025)</p>
+            <span>
+                <h1>Pokédex</h1>
+                <p>({listKeys.length} / 1025)</p>
+            </span>
             <ul>
                 {listKeys.map((item) => {
                     return (
                         <li key={item}>
-                            <p>{item}</p>
                             <img src={list[item]} alt={item} />
+                            <a target='blank' href={`https://pokemondb.net/pokedex/${item}`}>
+                                {item}
+                            </a>
                         </li>
                     );
                 })}
