@@ -139,7 +139,7 @@ function App() {
                     </>
                 );
             case 'POKEDEX':
-                return <PokeDex />;
+                return <PokeDex handler={resetGame('LOSE')} />;
         }
     } else {
         return (

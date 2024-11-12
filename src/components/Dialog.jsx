@@ -11,7 +11,7 @@ function Dialog({ currentScore, bestScore, gameStatus, handler, handler2 }) {
                         ? 'which is now your best score!'
                         : `${bestScore} is your best score.`}
                 </p>
-                <Button text='Click to restart' handler={handler} />
+                <Button text='Restart' handler={handler} />
                 <Button text='Open Pokédex' handler={handler2} />
             </dialog>
         );

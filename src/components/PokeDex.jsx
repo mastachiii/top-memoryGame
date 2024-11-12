@@ -1,4 +1,6 @@
-function PokeDex() {
+import { Button } from './Button';
+
+function PokeDex({ handler }) {
     const list = JSON.parse(localStorage.getItem('pokeDex'));
     const listKeys = Object.keys(list);
 
@@ -8,7 +10,8 @@ function PokeDex() {
                 <h1>Pokédex</h1>
                 <p>({listKeys.length} / 1025)</p>
             </span>
-            <p>Click on their names for more details !</p>
+            <p>Click on their names for more details!</p>
+            <Button text='PLAY AGAIN ?' handler={handler} />
             <ul>
                 {listKeys.map((item) => {
                     return (
