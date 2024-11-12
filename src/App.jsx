@@ -7,6 +7,10 @@ import { mapNames } from './scripts/mapper';
 import { randomizeList } from './scripts/randomize';
 import { selectSfx } from './scripts/dom';
 
+let pokeDex = localStorage.getItem('pokeDex');
+
+pokeDex = pokeDex ? JSON.parse(pokeDex) : localStorage.setItem('pokeDex', '{}');
+
 function App() {
     const [fetchStatus, setFetchStatus] = useState(false);
     const [gameStatus, setGameStatus] = useState(null);
@@ -25,6 +29,11 @@ function App() {
                     const cardsSelected = Object.values(copy).filter((item) => item === 'SELECTED');
 
                     setCurrentScore(currentScore + 1);
+
+                    if (!Object.keys(pokeDex).includes(key)) {
+                        pokeDex[key] = images[key];
+                        localStorage.setItem('pokeDex', JSON.stringify(pokeDex));
+                    }
 
                     cardsSelected.length === cardsPerLevel
                         ? setGameStatus('CLEAR')
