@@ -54,7 +54,9 @@ function App() {
             setCards(mapNames(list.names));
             setImages(list.images);
             setGameStatus('INGAME');
-            setFetchStatus(true);
+            setTimeout(() => {
+                setFetchStatus(true);
+            }, 1200);
         }
 
         if (!fetchStatus) fetchData();
@@ -114,9 +116,10 @@ function App() {
         }
     } else {
         return (
-            <>
-                <p>Fetching</p>
-            </>
+            <div className='loading'>
+                <img src='/icons/pokeball.png' className='pokeball' />
+                <p>Fetching Pokémon</p>
+            </div>
         );
     }
 }

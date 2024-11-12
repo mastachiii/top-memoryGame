@@ -3,6 +3,15 @@
     src: url(/public/fonts/Pokemon\ Classic.ttf);
 }
 
+@keyframes image-spin {
+    0% {
+    }
+
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
 @keyframes text-pop {
     from {
         color: white;
@@ -81,12 +90,34 @@ img {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
     }
+}
+
+.loading {
+    margin: 0 auto;
+    min-height: 90vh;
+    text-align: center;
+    font-size: calc(22rem / 16);
+
+    > p {
+        background-color: white;
+        padding: 1rem;
+        clip-path: var(--var-pixelated-borders);
+        animation: 700ms text-pop infinite alternate;
+    }
+}
+
+.pokeball {
+    align-self: center;
+    margin: 0;
+    width: 10%;
+    animation: 3s image-spin infinite;
 }
 
 .cards {
     width: 100%;
-    height: 70vh;
+    min-height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
