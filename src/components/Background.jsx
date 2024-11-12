@@ -12,6 +12,7 @@ function Background() {
                 minHeight: 100,
                 zIndex: -1,
             }}
+            controls={false}
         >
             <source src='/bg.mp4' />
         </video>

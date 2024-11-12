@@ -41,7 +41,12 @@ function App() {
     function resetGame(gameStatus) {
         return () => {
             currentScore > bestScore ? setBestScore(currentScore) : null;
-            gameStatus === 'LOSE' ? setCurrentScore(0) : setCardsPerLevel(cardsPerLevel + 3);
+            if (gameStatus === 'LOSE') {
+                setCurrentScore(0);
+                setCardsPerLevel(3);
+            } else {
+                setCardsPerLevel(cardsPerLevel + 3);
+            }
             setCards(null);
             setFetchStatus(false);
         };
@@ -73,7 +78,7 @@ function App() {
                             <Score value={currentScore} text='Current Score: ' />
                             <Score value={bestScore} text='Best Score: ' />
                         </div>
-                        <div className='cards foo' >
+                        <div className='cards foo'>
                             {cardsRandomized.map((item) => {
                                 return (
                                     <Card
