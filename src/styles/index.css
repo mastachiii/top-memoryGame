@@ -149,6 +149,10 @@ dialog {
         background-color: white;
         padding: 0 3rem;
     }
+    > p {
+        font-size: calc(12rem / 16);
+    }
+
     ul {
         width: 100%;
         display: flex;
@@ -172,6 +176,10 @@ dialog {
             font-size: 1rem;
             text-decoration: none;
             color: black;
+        }
+
+        a:hover {
+            animation: 1s text-pop infinite alternate;
         }
     }
 

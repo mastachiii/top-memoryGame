@@ -8,6 +8,7 @@ function PokeDex() {
                 <h1>Pokédex</h1>
                 <p>({listKeys.length} / 1025)</p>
             </span>
+            <p>Click on their names for more details !</p>
             <ul>
                 {listKeys.map((item) => {
                     return (
