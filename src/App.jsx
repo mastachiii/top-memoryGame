@@ -16,7 +16,6 @@ function App() {
     const [bestScore, setBestScore] = useState(0);
 
     function handleGameFlow(key) {
-        // TODO: Refactor API to fetch only 3 cards per level and mulitply once a level is cleared.
         return () => {
             switch (cards[key]) {
                 case 'UNSELECTED': {
@@ -54,8 +53,8 @@ function App() {
 
             setCards(mapNames(list.names));
             setImages(list.images);
-            setFetchStatus(true);
             setGameStatus('INGAME');
+            setFetchStatus(true);
         }
 
         if (!fetchStatus) fetchData();
@@ -67,19 +66,23 @@ function App() {
                 const cardsRandomized = randomizeList(cards);
 
                 return (
-                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                        {cardsRandomized.map((item) => {
-                            return (
-                                <Card
-                                    value={images[item]}
-                                    status={cards[item]}
-                                    handler={handleGameFlow(item)}
-                                    key={item}
-                                />
-                            );
-                        })}
-                        <Score value={currentScore} text='Current Score: ' />
-                        <Score value={bestScore} text='Best Score: ' />
+                    <div>
+                        <div className="cards">
+                            {cardsRandomized.map((item) => {
+                                return (
+                                    <Card
+                                        value={images[item]}
+                                        status={cards[item]}
+                                        handler={handleGameFlow(item)}
+                                        key={item}
+                                    />
+                                );
+                            })}
+                        </div>
+                        <div className='score'>
+                            <Score value={currentScore} text='Current Score: ' />
+                            <Score value={bestScore} text='Best Score: ' />
+                        </div>
                     </div>
                 );
             }

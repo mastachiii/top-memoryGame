@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+img {
+    width: 130px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    > div {
+        width: 20%;
+        border: solid 1px black;
+    }
+}
+
+.score {
+    font-size: 2rem;
+}
