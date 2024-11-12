@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card } from './components/Card';
 import { Score } from './components/Score';
 import { Dialog } from './components/Dialog';
+import { PokeDex } from './components/Pokedex';
 import { createList } from './scripts/api';
 import { mapNames } from './scripts/mapper';
 import { randomizeList } from './scripts/randomize';
@@ -88,6 +89,7 @@ function App() {
 
                 return (
                     <div>
+                        <PokeDex />
                         <div className='score'>
                             <Score value={currentScore} text='Current Score: ' />
                             <Score value={bestScore} text='Best Score: ' />
