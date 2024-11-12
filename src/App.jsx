@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card } from './components/Card';
 import { Score } from './components/Score';
 import { Dialog } from './components/Dialog';
+import { Background } from './components/Background';
 import { createList } from './scripts/api';
 import { mapNames } from './scripts/mapper';
 import { randomizeList } from './scripts/randomize';
@@ -90,26 +91,34 @@ function App() {
 
             case 'LOSE':
                 return (
-                    <Dialog
-                        currentScore={currentScore}
-                        bestScore={bestScore}
-                        handler={resetGame(gameStatus)}
-                        gameStatus={gameStatus}
-                    />
+                    <>
+                        <Dialog
+                            currentScore={currentScore}
+                            bestScore={bestScore}
+                            handler={resetGame(gameStatus)}
+                            gameStatus={gameStatus}
+                        />
+                    </>
                 );
 
             case 'CLEAR':
                 return (
-                    <Dialog
-                        currentScore={currentScore}
-                        bestScore={bestScore}
-                        handler={resetGame(gameStatus)}
-                        gameStatus={gameStatus}
-                    />
+                    <>
+                        <Dialog
+                            currentScore={currentScore}
+                            bestScore={bestScore}
+                            handler={resetGame(gameStatus)}
+                            gameStatus={gameStatus}
+                        />
+                    </>
                 );
         }
     } else {
-        return <p>Fetching</p>;
+        return (
+            <>
+                <p>Fetching</p>
+            </>
+        );
     }
 }
 
