@@ -63,6 +63,10 @@ function App() {
         };
     }
 
+    function openPokeDex() {
+        setGameStatus('POKEDEX');
+    }
+
     useEffect(() => {
         async function fetchData() {
             const list = await createList(cardsPerLevel);
@@ -89,7 +93,6 @@ function App() {
 
                 return (
                     <div>
-                        <PokeDex />
                         <div className='score'>
                             <Score value={currentScore} text='Current Score: ' />
                             <Score value={bestScore} text='Best Score: ' />
@@ -118,6 +121,7 @@ function App() {
                             currentScore={currentScore}
                             bestScore={bestScore}
                             handler={resetGame(gameStatus)}
+                            handler2={openPokeDex}
                             gameStatus={gameStatus}
                         />
                     </>
@@ -134,6 +138,8 @@ function App() {
                         />
                     </>
                 );
+            case 'POKEDEX':
+                return <PokeDex />;
         }
     } else {
         return (

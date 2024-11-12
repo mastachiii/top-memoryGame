@@ -1,6 +1,6 @@
 import { Button } from './Button';
 
-function Dialog({ currentScore, bestScore, gameStatus, handler }) {
+function Dialog({ currentScore, bestScore, gameStatus, handler, handler2 }) {
     if (gameStatus === 'LOSE') {
         return (
             <dialog open={true}>
@@ -12,6 +12,7 @@ function Dialog({ currentScore, bestScore, gameStatus, handler }) {
                         : `${bestScore} is your best score.`}
                 </p>
                 <Button text='Click to restart' handler={handler} />
+                <Button text='Open Pokédex' handler={handler2} />
             </dialog>
         );
     } else {
