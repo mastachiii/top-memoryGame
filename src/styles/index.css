@@ -53,10 +53,6 @@
     }
 }
 
-.foo {
-    animation: 1s show-up 1;
-}
-
 :root {
     --var-pixelated-borders: polygon(
         0px calc(100% - 20px),
@@ -141,6 +137,16 @@ dialog {
         justify-content: center;
         align-items: center;
     }
+}
+
+.github {
+    width: 2%;
+    margin: 2rem auto auto auto;
+    transition: transform 300ms ease;
+}
+
+.github:hover {
+    transform: scale(1.2);
 }
 
 .pokeDex {

@@ -7,7 +7,7 @@ async function createList(amountOfCards) {
     };
 
     // Only allow up to 18 cards per game.
-    amountOfCards = amountOfCards < 18 ? amountOfCards : 18
+    amountOfCards = amountOfCards < 12 ? amountOfCards : 12
 
     while (list.names.length !== amountOfCards) {
         const randomNumber = Math.floor(Math.random() * 1000);

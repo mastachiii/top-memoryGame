@@ -11,5 +11,8 @@ createRoot(document.getElementById('root')).render(
         <Audio url={'/sfx/select.mp3'} id={'select'} />
         <Background />
         <App />
+        <a href='https://github.com/mastachiii' target='blank'>
+            <img src='/icons/github.svg' className='github' />
+        </a>
     </StrictMode>
 );
